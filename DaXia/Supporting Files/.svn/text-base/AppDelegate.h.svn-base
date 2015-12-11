@@ -1,0 +1,29 @@
+//
+//  AppDelegate.h
+//  ZPFramework
+//
+//  Created by XuDong Jin on 14-6-30.
+//  Copyright (c) 2014年 XuDong Jin. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "TabBarViewController.h"
+//umeng
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
+#import "UMSocialSinaHandler.h"
+//JPush
+#import "APService.h"
+#import "HomeViewController.h"
+#import "BookrackViewController.h"
+#import "MeViewController.h"
+
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
+{
+    TabBarViewController *ctrl;
+    BOOL ifJump;//1 收到推送时跳转到相应页面 0 不跳转
+}
+@property (strong, nonatomic) UIWindow *window;
+
+@end

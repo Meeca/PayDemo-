@@ -1,0 +1,74 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import "Tool.h"
+    #import "UIImageView+WebCache.h"
+    #import "UIButton+WebCache.h"
+    #import "MobClick.h"
+    #import "UMSocial.h"
+    #import "UMSocialWechatHandler.h"
+    #import "UMSocialQQHandler.h"
+    #import "TPKeyboardAvoidingScrollView.h"
+
+#import "tool.h"
+
+
+#endif
+
+#define kScreenWidth   ([[UIScreen mainScreen] bounds].size.width)
+#define kScreenHeight   ([[UIScreen mainScreen] bounds].size.height)
+#define kRatio(ra)   ra*kScreenWidth/1242
+
+//分类的偏移
+#define classifyIns 12
+//分类组头的高度
+#define sectionHeight 35
+//广告栏的高度
+#define guangGaoHeight (kScreenWidth*150/320)
+//英雄TOP5 图片的高度
+#define heroWidth (kScreenWidth*90/320)
+#define heroHeight (heroWidth*1.3)
+//日常桑 高度
+#define tiaoManHeight (kScreenWidth*110/320)
+//超人气作品尺寸
+#define superHotWidth ((kScreenWidth-50)/3)
+#define superHotHeight (superHotWidth*1.3)
+//活动 高度
+#define huoDongHeight (kScreenWidth*100/320)
+//动画专区尺寸
+#define animationWidth ((kScreenWidth-50)/2)
+#define animationHeight (animationWidth*0.7)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

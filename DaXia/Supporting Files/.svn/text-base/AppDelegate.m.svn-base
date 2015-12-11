@@ -1,0 +1,90 @@
+//
+//  AppDelegate.m
+//  ZPFramework
+//
+//  Created by XuDong Jin on 14-6-30.
+//  Copyright (c) 2014年 XuDong Jin. All rights reserved.
+//
+
+#import "AppDelegate.h"
+#import <AlipaySDK/AlipaySDK.h>
+#import "BaseNavigationController.h"
+#import "AppDelegate+NewFeature.h"
+#import "AppDelegate+UMShare.h"
+#import "AppDelegate+AliPay.h"
+#import "AppDelegate+NetStatus.h"
+#import "AppDelegate+JPush.h"
+#import "AppDelegate+Device.h"
+
+
+@implementation AppDelegate
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    // Override point for customization after application launch.
+    
+    //状态栏高亮
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+    
+    NSLog(@"路径---  %@",[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]);
+    
+    [self initJPushWithApplication:application withOptions:launchOptions];
+    
+    [self netStatusNoti];
+    // 初始化 友盟
+    [self initUMeng];
+    // 注册微信支付
+    [self weiXinRegister];
+    [self newFeatureFinishBlock:^{
+        
+    }];
+    
+    [self deviceInfo];
+    
+       //启动图显示至少1.5秒
+    [NSThread sleepForTimeInterval:0];
+    
+
+
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    return YES;
+    
+}
+/**
+ 由于用到支付宝所以这个方法放在 appdelegate 里)
+ */
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    [self aLiPayWithApplication:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+    return  [self UMengActionWithUrl:url];
+}
+
+/**
+ *  程序进入后台的时候调用
+ */
+- (void)applicationDidEnterBackground:(UIApplication *)application{
+    
+    // 提醒操作系统：当前这个应用程序需要在后台开启一个任务
+    // 操作系统会允许这个应用程序在后台保持运行状态（能够持续的时间是不确定）
+    UIBackgroundTaskIdentifier taskID = [application beginBackgroundTaskWithExpirationHandler:^{
+        // 后台运行的时间到期了，就会自动调用这个block
+        [application endBackgroundTask:taskID];
+    }];
+}
+
+///   当收到内存警告的时候 急需做的操作
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+{
+    // 赶紧清除所有的内存缓存
+    [[SDImageCache sharedImageCache] clearMemory];
+    
+    // 赶紧停止正在进行的图片下载操作
+    [[SDWebImageManager sharedManager] cancelAll];
+}
+
+
+
+
+
+@end

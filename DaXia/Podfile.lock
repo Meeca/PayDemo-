@@ -1,0 +1,10 @@
+PODS:
+  - UMengSocial (4.2.3)
+
+DEPENDENCIES:
+  - UMengSocial
+
+SPEC CHECKSUMS:
+  UMengSocial: 85882abe5b20aa38ad558ece71360e16b5d50909
+
+COCOAPODS: 0.39.0
